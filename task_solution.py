@@ -9,8 +9,8 @@ def main(K):
 
 
 if __name__=='__main__':
-    K = input() # digits
-    if 1 <= int(K) <= 100000:
+    K = int(input()) # digits
+    if 1 <= K <= 100000:
         print(main(K))
     else:
         print("Not in Constraints")
