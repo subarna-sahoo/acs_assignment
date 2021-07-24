@@ -1,7 +1,7 @@
 from functools import  reduce
 
 def main(K):
-    for N in range(10**(K-1), 10**K-1):
+    for N in range(int('1'*K), 10**K-1):
         prod_k =  reduce(lambda a,b:int(a)*int(b), list(str(N)))
         sum_k = reduce(lambda a,b:int(a)+int(b), list(str(N)))
         if prod_k >= sum_k:
