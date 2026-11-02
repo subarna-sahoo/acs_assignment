@@ -1,36 +1,42 @@
-# ACS assignment
+# ACS Assignment: Minimum Digit Product ≥ Digit Sum
 
-You are given an integer K.
+## Problem
 
-Task
+Given an integer **K**, find a valid **K-digit** integer such that:
 
-Write code to determine a valid integer having K digits such that the product of digits of the integer is greater than or equal to the sum of digits of the integer and the product of the digits of the integer is minimized. If more than 1 such integer exists, determine the smallest possible integer.
+1. the **product** of its digits is **greater than or equal to** the **sum** of its digits, and
+2. the product of its digits is as **small as possible**.
 
-Notes
+If more than one integer qualifies, return the **smallest** one.
 
-A valid integer does not contain leading zeros. For example, valid integers having 3 digits are "234", "123". But "012" is not a valid integer.
-Suppose a valid integer having K digits is a1a2..ak, then the sum of digits is a1 + a2 +..+ ak and the product of digits is a1 * a2 *..* ak.
-Example
+A valid integer has no leading zeros: `234` and `123` are valid 3-digit integers, `012` is not.
+For an integer `a1 a2 … ak`, sum = `a1 + a2 + … + ak` and product = `a1 × a2 × … × ak`.
 
-Assumption
+**Constraints:** `1 ≤ K ≤ 100000`
 
-K = 2
-Approach
+### Examples
 
-Consider integer N = 22, you can see that product of digits = 4 is greater than or equal to the sum of digits = 4 and the product of the digits is minimized. It can be proved that this is the smallest integer of 2 digits.
-Therefore, the output is 22.
+| K | Output | Why |
+|---|---|---|
+| 2 | `22` | product 2×2 = 4 ≥ sum 2+2 = 4, and no smaller 2-digit number qualifies |
+| 3 | `123` | product 1×2×3 = 6 ≥ sum 1+2+3 = 6, and no smaller 3-digit number qualifies |
 
+## Solutions
 
-K = 2
-Approach
+| File | Approach | Practical for |
+|---|---|---|
+| [`task_solution.py`](task_solution.py) | Brute force: try every K-digit number from `11…1` upward and return the first that qualifies. | Small K only (time grows as 10^K) |
+| [`task_solution_fast.cpp`](task_solution_fast.cpp) | Greedy: only a handful of digits (at most 6) need to be greater than 1. Start with those set to 9 and the rest to 1, lower each 9 to the smallest digit that keeps product ≥ sum, then sort the digits ascending. | All K up to 100000 |
 
-Consider integer N = 123, you can see that product of digits = 6 is greater than or equal to the sum of digits = 6 and the product of the digits is minimized. It can be proved that this is the smallest integer of 3 digits.
-Therefore, the output is 123.
+## Running
 
-Constraints
+```bash
+# Python (brute force)
+echo 3 | python3 task_solution.py          # → 123
 
+# C++ (fast)
+g++ -O2 -o solution task_solution_fast.cpp
+echo 3 | ./solution                         # → 123
+```
 
-1 =< K <= 100000
-
-
-# $ python3 task_solution.py 
+> The C++ file includes `<bits/stdc++.h>`, which only GCC provides. On macOS, compile with Homebrew GCC (`g++-14`), or replace that line with `<iostream>`, `<string>`, `<cmath>` and `<algorithm>`.
